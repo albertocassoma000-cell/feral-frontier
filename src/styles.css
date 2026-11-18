@@ -1,155 +1,25 @@
-/*
- * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
- * - Keep every @import in this top block, above @theme and the rest of the file. Install an
- *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
- *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
- */
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-/*
- * Design system definition.
- *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
-
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
-}
-
-@layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
-}
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#edf2ed;background:#101713;font-synthesis:none;text-rendering:optimizeLegibility}
+*{box-sizing:border-box}
+body{margin:0;background:#101713;color:#edf2ed}
+button,input{font:inherit}
+button{cursor:pointer}
+.luanda-shell{min-height:100vh;background:#101713;color:#edf2ed;padding:0 30px;max-width:1800px;margin:auto}
+.game-topbar{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #29332e;gap:20px}
+.brand-lockup{display:flex;align-items:center;gap:11px}.brand-mark{width:39px;height:39px;border-radius:11px;background:#e5a354;color:#172019;display:grid;place-items:center;font-size:24px;font-weight:950;font-style:italic}.brand-lockup strong{display:block;letter-spacing:3px;font-size:15px}.brand-lockup small{display:block;color:#829087;font-size:9px;letter-spacing:2px;margin-top:3px}
+.top-location,.top-actions{display:flex;align-items:center;gap:9px;color:#b5c0b7;font-size:12px}.top-location svg{color:#e5a354}.top-location span{color:#66756b}.top-actions{gap:12px}.online-dot,.live-dot,.activity-pulse{width:7px;height:7px;border-radius:50%;background:#73c48e;display:inline-block;box-shadow:0 0 10px #73c48e}
+.icon-button{border:1px solid #344239;background:#1b2620;color:#e8eee9;border-radius:9px;width:37px;height:37px;display:grid;place-items:center}
+.welcome-screen{min-height:calc(100vh - 135px);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5%;padding:50px 4%}.welcome-copy{max-width:530px}.eyebrow{font-size:10px;letter-spacing:3px;color:#e5a354;font-weight:800}.welcome-copy h1{font-size:clamp(48px,6vw,82px);line-height:.99;letter-spacing:-4px;margin:22px 0}.welcome-copy h1 em{font-style:normal;color:#e5a354}.welcome-copy p{color:#a8b5aa;line-height:1.8;max-width:440px;font-size:15px;margin-bottom:30px}.welcome-copy label{display:block;font-size:11px;color:#aeb9b0;margin-bottom:8px}.welcome-copy input{display:block;width:min(100%,360px);height:48px;border:1px solid #3b4a40;border-radius:8px;background:#18221c;color:white;padding:0 14px;outline:none}.welcome-copy input:focus{border-color:#e5a354}.primary-cta{margin-top:15px;width:min(100%,360px);height:51px;background:#e5a354;border:0;border-radius:8px;color:#182019;font-size:11px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between;padding:0 18px}.primary-cta span{font-size:20px}.prototype-note{display:block;margin-top:17px;color:#728076;font-size:10px}
+.welcome-art{height:min(590px,65vh);min-height:350px;position:relative;overflow:hidden;border:1px solid #34443a;border-radius:18px;background:linear-gradient(160deg,#8caa9b 0%,#d4ae7c 52%,#5c776c 100%)}.sun-glow{position:absolute;width:180px;height:180px;border-radius:50%;background:#f5d49b;top:55px;right:17%;filter:blur(1px);box-shadow:0 0 90px #f7d59a}.skyline{position:absolute;bottom:36%;left:0;right:0;height:48%;display:flex;align-items:end;justify-content:center;gap:9px}.skyline i{display:block;width:12%;height:60%;background:#596d66;border:3px solid #7e9385;border-bottom:0;box-shadow:inset 0 0 0 8px #657b70}.skyline i:nth-child(2){height:82%;width:15%}.skyline i:nth-child(3){height:54%}.skyline i:nth-child(4){height:100%;width:17%;background:#53665f}.skyline i:nth-child(5){height:72%}.skyline i:nth-child(6){height:88%;width:14%}.skyline i:nth-child(7){height:52%}.welcome-street{position:absolute;bottom:-10%;left:-15%;width:130%;height:46%;background:#39433e;transform:perspective(260px) rotateX(12deg);border-top:8px solid #c2b18c}.street-line{position:absolute;top:48%;left:0;width:100%;border-top:3px dashed #d9c89d}.welcome-tag{position:absolute;bottom:22px;left:25px;font-size:10px;letter-spacing:3px;color:white}.welcome-tag b{color:#e5a354}
+.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 325px;gap:20px;padding:22px 0;min-height:calc(100vh - 145px)}.game-world{position:relative;min-height:620px;border:1px solid #35453a;border-radius:13px;overflow:hidden;background:#829878}.world-canvas{width:100%;height:100%;min-height:620px;display:block}.world-label{position:absolute;z-index:2;top:16px;left:17px;background:#152019df;border:1px solid #4b5a4e;border-radius:7px;padding:9px 12px;font-size:9px;letter-spacing:1.5px;font-weight:900;display:flex;align-items:center;gap:8px}.world-label small{color:#9eaa9f;font-size:8px;margin-left:5px}.world-coordinates{position:absolute;right:15px;top:16px;background:#152019d9;padding:8px 10px;border-radius:6px;font-size:10px;color:#c5d0c6}.world-controls{position:absolute;bottom:15px;left:15px;display:flex;gap:18px;background:#17231ddf;padding:10px 12px;border-radius:8px;font-size:10px;color:#c7d1c9}.world-controls span{display:flex;align-items:center;gap:5px}kbd{background:#34443a;border:1px solid #607064;border-radius:4px;padding:3px 6px;color:white;font-size:9px}.mobile-pad{display:none}
+.game-sidebar{background:#17211b;border:1px solid #303e34;border-radius:13px;padding:17px;display:flex;flex-direction:column;gap:17px}.player-card{display:flex;align-items:center;gap:10px}.avatar{width:42px;height:42px;background:#e5a354;border-radius:11px;color:#172019;display:grid;place-items:center;font-size:20px;font-weight:900}.player-card strong,.player-card small{display:block}.player-card strong{font-size:13px}.player-card small{color:#87968b;font-size:10px;margin-top:4px}.level-pill{margin-left:auto;color:#e5a354;border:1px solid #725637;border-radius:5px;padding:5px 7px;font-size:9px;font-weight:800}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.status-tile{background:#202d25;border:1px solid #344239;border-radius:8px;padding:11px}.status-tile svg{width:15px;color:#e5a354;display:block;margin-bottom:9px}.status-tile small{display:block;color:#89978d;font-size:8px;letter-spacing:1.3px}.status-tile strong{display:block;font-size:13px;margin-top:5px}
+.needs-panel,.mission-panel{border-top:1px solid #334137;padding-top:15px}.needs-panel h3,.mission-panel h3{font-size:9px;letter-spacing:1.5px;color:#a6b2a8;margin:0 0 14px}.need-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;margin:10px 0 7px}.need-row span{display:flex;align-items:center;gap:7px;color:#b7c2b9}.need-row svg{width:14px;color:#e5a354}.need-row b{font-size:10px;color:#e0e8e1}.meter{height:5px;background:#344239;border-radius:10px;overflow:hidden}.meter i{display:block;height:100%;background:#79bd8c;border-radius:10px}.meter.hunger i{background:#e3a25d}
+.section-heading{display:flex;align-items:center;justify-content:space-between}.section-heading span{font-size:9px;color:#e5a354}.mission{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #2d3931}.mission-icon{width:32px;height:32px;background:#29372e;border-radius:8px;display:grid;place-items:center;color:#e5a354}.mission-icon svg{width:16px}.mission b,.mission small{display:block}.mission b{font-size:10px}.mission small{font-size:9px;color:#839187;margin-top:4px}.mission-arrow{margin-left:auto;color:#e5a354}.activity-box{display:flex;align-items:center;gap:10px;background:#202d25;padding:11px;border-radius:8px}.activity-pulse{background:#e5a354;box-shadow:0 0 10px #e5a354}.activity-box small,.activity-box b{display:block}.activity-box small{font-size:8px;letter-spacing:1px;color:#89978d}.activity-box b{font-size:10px;margin-top:4px}.interact-button{height:43px;background:#e5a354;border:0;border-radius:7px;color:#172019;font-size:9px;font-weight:900;letter-spacing:.5px}.interact-button span{margin-left:9px}.game-message{background:#202d25;border-left:2px solid #e5a354;padding:10px;font-size:10px;color:#bdc9bf;line-height:1.5;min-height:45px}.map-button{background:transparent;border:1px solid #405044;border-radius:7px;color:#c9d4cb;height:39px;font-size:10px;display:flex;align-items:center;justify-content:center;gap:8px}.map-button svg{color:#e5a354}
+.map-overlay{position:fixed;inset:0;background:#07100dcc;z-index:10;display:grid;place-items:center;padding:20px}.map-modal{width:min(500px,100%);background:#18231c;border:1px solid #455448;border-radius:13px;padding:22px;box-shadow:0 20px 80px #0008}.map-modal .section-heading small{font-size:9px;letter-spacing:2px;color:#e5a354}.map-modal h2{margin:5px 0 17px;font-size:23px}.map-list{display:grid;gap:8px}.map-list button{display:flex;align-items:center;gap:12px;background:#223027;border:1px solid #34463a;border-radius:8px;padding:11px;color:#edf2ed;text-align:left}.map-list button>span{width:25px;height:25px;border-radius:6px;display:grid;place-items:center;color:#182019;font-weight:900;font-size:11px}.map-list b{font-size:11px}.map-list small{margin-left:auto;color:#a4b1a7;font-size:9px}
+.game-footer{height:48px;border-top:1px solid #29362e;display:flex;align-items:center;justify-content:space-between;color:#78877d;font-size:9px;letter-spacing:.7px}.game-footer span{display:flex;align-items:center;gap:6px}.game-footer svg{color:#e5a354}
+@media(max-width:900px){.luanda-shell{padding:0 15px}.game-layout{grid-template-columns:1fr}.game-world,.world-canvas{min-height:520px}.game-sidebar{display:grid;grid-template-columns:1fr 1fr}.player-card,.needs-panel,.mission-panel,.activity-box,.interact-button,.game-message,.map-button{grid-column:span 2}.welcome-screen{gap:25px;padding:35px 1%}.top-location{display:none}}
+@media(max-width:600px){.game-topbar{height:65px}.top-actions{font-size:0}.welcome-screen{grid-template-columns:1fr;padding:45px 4%;gap:30px}.welcome-copy h1{font-size:54px}.welcome-art{height:300px;min-height:300px}.game-layout{padding:12px 0}.game-world,.world-canvas{min-height:440px}.game-sidebar{padding:13px;gap:12px}.world-controls{display:none}.mobile-pad{position:absolute;bottom:13px;right:13px;display:flex;align-items:end;gap:8px}.mobile-pad>div{display:grid;grid-template-columns:repeat(3,35px);gap:4px}.mobile-pad button{height:35px;min-width:35px;background:#17231de8;border:1px solid #77877a;border-radius:7px;color:white;font-size:16px}.mobile-pad>div button:first-child{grid-column:2}.mobile-pad .interact-mobile{background:#e5a354;color:#182019;font-weight:900}.game-footer{height:auto;min-height:48px;flex-wrap:wrap;gap:8px;padding:12px 0}.game-footer span:nth-child(2){display:none}.status-tile strong{font-size:11px}}
