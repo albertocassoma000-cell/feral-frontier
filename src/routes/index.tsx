@@ -138,7 +138,7 @@ function LuandaGame() {
     avatar.position.set(0,0,8);scene.add(avatar);playerRef.current=avatar;
 
     const clock=new THREE.Clock();let lastUi=0;
-    const animate=()=>{
+    let raf=0;\n    const animate=()=>{
       const delta=Math.min(clock.getDelta(),.04),move=new THREE.Vector3();
       if(keys.current.w||keys.current.arrowup)move.z-=1;
       if(keys.current.s||keys.current.arrowdown)move.z+=1;
@@ -151,7 +151,7 @@ function LuandaGame() {
       const desired=avatar.position.clone().add(new THREE.Vector3(0,7,0)).addScaledVector(forward,-10.5);
       camera.position.lerp(desired,.09);camera.lookAt(target);
       if(clock.elapsedTime-lastUi>.12){setPosition({x:Math.round(avatar.position.x),z:Math.round(avatar.position.z)});const near=locations.map(l=>({...l,d:Math.hypot(l.x-avatar.position.x,l.z-avatar.position.z)})).sort((a,b)=>a.d-b.d)[0];setNearby(near&&near.d<18?near.name:"");lastUi=clock.elapsedTime;}
-      renderer.render(scene,camera);requestAnimationFrame(animate);
+      renderer.render(scene,camera);raf=requestAnimationFrame(animate);
     };
     const raf=requestAnimationFrame(animate);
     const resize=()=>{if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight);};
